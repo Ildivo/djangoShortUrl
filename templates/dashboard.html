@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.username }}</h1>
+    <p><a href="{% url 'create_link' %}">Create Short Link</a></p>
+    <h2>Your Short Links</h2>
+    <ul>
+        {% for link in links %}
+            <li>
+                <a href="{{ link.original_url }}" target="_blank">{{ link.original_url }}</a> 
+                - <a href="/{{ link.short_code }}" target="_blank">{{ link.short_code }}</a>
+                <br>
+                Clicks: {{ link.click_count }}
+            </li>
+        {% empty %}
+            <li>You have no short links.</li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'logout' %}">Logout</a></p>
+</body>
+</html>
