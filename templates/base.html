@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Dashboard</title>
+</head>
+<body>
+
+    <h1>Your Dashboard</h1>
+    <h2>Short Links and Click Statistics</h2>
+
+    {% for link_data in links_with_stats %}
+        <div class="link-info">
+            <h3>Link: <a href="{{ link_data.link.original_url }}" target="_blank">{{ link_data.link.original_url }}</a></h3>
+            <p><strong>Total Clicks:</strong> {{ link_data.total_clicks }}</p>
+
+            <h4>Click Statistics:</h4>
+            {% if link_data.clicks %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Browser</th>
+                            <th>OS</th>
+                            <th>Country</th>
+                            <th>City</th>
+                            <th>Clicked At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for click in link_data.clicks %}
+                            <tr>
+                                <td>{{ click.browser }}</td>
+                                <td>{{ click.os }}</td>
+                                <td>{{ click.country }}</td>
+                                <td>{{ click.city }}</td>
+                                <td>{{ click.clicked_at }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No clicks recorded yet for this link.</p>
+            {% endif %}
+        </div>
+        <hr>
+    {% endfor %}
+
+</body>
+</html>

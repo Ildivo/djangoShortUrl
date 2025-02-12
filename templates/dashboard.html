@@ -20,12 +20,12 @@
     <div class="container mt-5">
         <h1 class="mb-4">Your Short Links</h1>
 
-        {% if links %}
-            {% for link in links %}
+        {% if links_with_stats %}
+            {% for link_data in links_with_stats %}
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">Short Link: <a href="/{{ link.short_code }}" target="_blank">{{ link.short_code }}</a></h5>
-                        <p class="card-text">Original URL: <a href="{{ link.original_url }}" target="_blank">{{ link.original_url }}</a></p>
+                        <h5 class="card-title">Short Link: <a href="/{{ link_data.link.short_code }}" target="_blank">{{ link_data.link.short_code }}</a></h5>
+                        <p class="card-text">Original URL: <a href="{{ link_data.link.original_url }}" target="_blank">{{ link_data.link.original_url }}</a></p>
 
                         <h6 class="mt-4">Click Stats:</h6>
                         <table class="table table-striped table-hover">
@@ -35,19 +35,23 @@
                                     <th>Country</th>
                                     <th>City</th>
                                     <th>IP Address</th>
+                                    <th>Browser</th>
+                                    <th>OS</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for stat in link.stats %}
+                                {% for stat in link_data.click_stats %}
                                     <tr>
                                         <td>{{ stat.clicked_at }}</td>
                                         <td>{{ stat.country|default:"Unknown" }}</td>
                                         <td>{{ stat.city|default:"Unknown" }}</td>
                                         <td>{{ stat.ip_address }}</td>
+                                        <td>{{ stat.browser|default:"Unknown" }}</td>
+                                        <td>{{ stat.os|default:"Unknown" }}</td>
                                     </tr>
                                 {% empty %}
                                     <tr>
-                                        <td colspan="4" class="text-center">No clicks yet.</td>
+                                        <td colspan="6" class="text-center">No clicks yet.</td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

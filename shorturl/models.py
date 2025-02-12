@@ -15,6 +15,8 @@ class ClickStats(models.Model):
     short_link = models.ForeignKey(ShortLink, on_delete=models.CASCADE, related_name='click_stats')
     country = models.CharField(max_length=100, blank=True, null=True)
     city = models.CharField(max_length=100, blank=True, null=True)
+    os = models.CharField(max_length=100, blank=True, null=True)
+    browser = models.CharField(max_length=100, blank=True, null=True)
     ip_address = models.GenericIPAddressField()
     clicked_at = models.DateTimeField(auto_now_add=True)
 
