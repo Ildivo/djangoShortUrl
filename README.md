@@ -31,7 +31,7 @@ DjangoShortUrl — это веб-приложение, которое позво
 Склонируйте репозиторий с проектом:
 
 ```bash
-git clone https://github.com/ваш-username/DjangoShortUrl.git
+git clone https://github.com/Ildivo/djangoShortUrl.git
 cd DjangoShortUrl
 ```
 
